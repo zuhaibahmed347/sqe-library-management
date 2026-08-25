@@ -21,7 +21,8 @@ class Library:
         return results
 
     def get_most_popular_book(self, borrow_counts):
-        # BUG 1: crashes if borrow_counts is empty
+        if not borrow_counts:
+            return None
         return max(borrow_counts, key=borrow_counts.get)
 
     def calculate_fine(self, days_late):
