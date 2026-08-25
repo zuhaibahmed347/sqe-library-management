@@ -12,8 +12,9 @@ class Library:
         self.members = {}
 
     def add_book(self, book):
-        # BUG 3: no check for duplicate ISBN
-        self.books.append(book)
+        if any(b.isbn == book.isbn for b in self.books):
+            raise ValueError(f"Book with ISBN {book.isbn} already exists")
+            self.books.append(book)
 
     def search_by_title(self, title):
         # BUG 5: case-sensitive comparison
