@@ -27,8 +27,9 @@ class Library:
         return max(borrow_counts, key=borrow_counts.get)
 
     def calculate_fine(self, days_late):
-        # BUG 4: wrong rate + no rounding, e.g. should be 0.5/day
-        return days_late * 0.3333333
+        if days_late < 0:
+            return 0.0
+        return round(days_late * 0.5, 2)
 
 
 class Member:
