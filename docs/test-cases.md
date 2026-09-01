@@ -34,3 +34,15 @@
 
 \*\*Negative/error-path tests:\*\* TC-002, TC-003, TC-005, TC-007, TC-009, TC-012 (6 of 12 — exceeds the minimum of 3).
 
+
+
+| ID | Title | Requirement | Preconditions | Steps | Expected | Priority | Type |
+
+|----|-------|-------------|----------------|-------|----------|----------|------|
+
+| TC-013 | Reject negative copies on add\_book | REQ-2 | Library is empty | 1. `lib.add\_book(Book("111", "Test", "X", -5))` | `ValueError` is raised; book is not added | Medium | Negative / Functional |
+
+| TC-014 | Case-insensitive title search | REQ-3 | Catalog contains "Clean Code" | 1. `lib.search\_by\_title("clean code")` | Returns the matching book regardless of casing | Low | Positive / Functional |
+
+| TC-015 | Popular book lookup with no borrow history | REQ-5 | No borrow data exists | 1. `lib.get\_most\_popular\_book({})` | Returns `None`, no exception raised | High | Positive / Functional |
+
