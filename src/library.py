@@ -38,6 +38,7 @@ class Library:
             raise ValueError(f"Member {member_id} has reached the 5-book borrow limit")
         self.borrowed_counts[member_id] = current + 1
         return True
+        
     def validate_isbn(isbn):
         if not isinstance(isbn, str):
             raise ValueError("ISBN must be a string")
