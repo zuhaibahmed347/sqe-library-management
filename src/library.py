@@ -10,6 +10,7 @@ class Library:
     def __init__(self):
         self.books = []
         self.members = {}
+        self.borrowed_counts = {}
 
     def add_book(self, book):
         if any(b.isbn == book.isbn for b in self.books):
