@@ -31,6 +31,13 @@ class Library:
         if days_late < 0:
             return 0.0
         return round(days_late * 0.5, 2)
+        
+    def borrow_book(self, member_id, isbn):
+    current = self.borrowed_counts.get(member_id, 0)
+    if current >= 5:
+        raise ValueError(f"Member {member_id} has reached the 5-book borrow limit")
+    self.borrowed_counts[member_id] = current + 1
+    return True
 
 
 def fine_tier(days_overdue):
@@ -51,12 +58,7 @@ def __init__(self):
     self.members = {}
     self.borrowed_counts = {}  # member_id -> count of books currently borrowed
 
-def borrow_book(self, member_id, isbn):
-    current = self.borrowed_counts.get(member_id, 0)
-    if current >= 5:
-        raise ValueError(f"Member {member_id} has reached the 5-book borrow limit")
-    self.borrowed_counts[member_id] = current + 1
-    return True
+
     
         
 class Member:
