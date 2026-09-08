@@ -38,6 +38,16 @@ class Library:
             raise ValueError(f"Member {member_id} has reached the 5-book borrow limit")
         self.borrowed_counts[member_id] = current + 1
         return True
+    def validate_isbn(isbn):
+        if not isinstance(isbn, str):
+            raise ValueError("ISBN must be a string")
+        if len(isbn) == 0:
+            raise ValueError("ISBN cannot be empty")
+        if not isbn.isdigit():
+            raise ValueError("ISBN must contain only digits")
+        if len(isbn) != 13:
+            raise ValueError("ISBN must be exactly 13 digits")
+        return True
 
 
 def fine_tier(days_overdue):
