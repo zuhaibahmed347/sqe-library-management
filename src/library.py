@@ -32,6 +32,20 @@ class Library:
         return round(days_late * 0.5, 2)
 
 
+def fine_tier(days_overdue):
+    if days_overdue < 0:
+        raise ValueError("days_overdue cannot be negative")
+    if days_overdue == 0:
+        return "None"
+    elif 1 <= days_overdue <= 7:
+        return "Low"
+    elif 8 <= days_overdue <= 14:
+        return "Medium"
+    elif 15 <= days_overdue <= 30:
+        return "High"
+    else:
+        return "Severe"
+        
 class Member:
     def __init__(self, member_id, name):
         self.member_id = member_id
