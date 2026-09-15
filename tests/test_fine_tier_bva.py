@@ -1,7 +1,6 @@
 from src.library import fine_tier
 import pytest
-from gradebook import fine_tier  # adjust import path to your module
-
+from src.library import fine_tier
 @pytest.mark.parametrize("days_overdue, expected", [
     (0, "None"),
     (1, "Low"),
