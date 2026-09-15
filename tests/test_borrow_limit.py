@@ -1,16 +1,19 @@
 import pytest
 from src.library import Library
 
-@pytest.mark.parametrize('starting_count,should_succeed', [
-    (3, True),   # valid class: member well within limit
-    (5, False),  # invalid class: member already at limit, 6th borrow rejected
-])
-def test_borrow_limit_classes(starting_count, should_succeed):
+def test_borrow_at_four_books_succeeds():
     lib = Library()
-    lib.borrowed_counts["m1"] = starting_count
-    if should_succeed:
-        lib.borrow_book("m1", "9780134685991")
-        assert lib.borrowed_counts["m1"] == starting_count + 1
-    else:
-        with pytest.raises(ValueError):
-            lib.borrow_book("m1", "9780134685991")
+    lib.borrowed_counts["m1"] = 4
+    assert lib.borrow_book("m1", "1234567890123") is True
+
+def test_borrow_at_five_books_blocked():
+    lib = Library()
+    lib.borrowed_counts["m1"] = 5
+    with pytest.raises(ValueError):
+        lib.borrow_book("m1", "1234567890123")
+
+def test_borrow_at_six_books_blocked():
+    lib = Library()
+    lib.borrowed_counts["m1"] = 6
+    with pytest.raises(ValueError):
+        lib.borrow_book("m1", "1234567890123")
