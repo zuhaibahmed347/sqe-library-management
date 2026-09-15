@@ -1,3 +1,4 @@
+from src.library import fine_tier
 import pytest
 from gradebook import fine_tier  # adjust import path to your module
 
