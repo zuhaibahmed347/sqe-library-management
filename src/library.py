@@ -91,8 +91,5 @@ class Member:
         self.name = name
 
 def rank_books_by_popularity(library):
-<<<<<<< HEAD
-    return []
-=======
-       return []
->>>>>>> 83c5329b306b6ee8b37db17c2de0e86464ad5bd1
+    """Return the library's books ranked by popularity (most borrowed first)."""
+    return list(library.books)
