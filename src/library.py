@@ -1,5 +1,7 @@
 class LibraryIOError(Exception):
     """Raised when the library cannot read or write its catalog file."""
+
+
 class Book:
     def __init__(self, isbn, title, author, copies):
         self.isbn = isbn
@@ -42,6 +44,19 @@ class Library:
         self.borrowed_counts[member_id] = current + 1
         return True
 
+    def total_available_copies(self):
+        return sum(b.available_copies for b in self.books)
+
+    def export_catalog(self, path):
+        content = "\n".join(
+            f"{b.isbn},{b.title},{b.author},{b.copies}" for b in self.books
+        )
+        try:
+            with open(path, "w") as f:
+                f.write(content)
+        except OSError as e:
+            raise LibraryIOError(f"Could not export catalog to {path}: {e}") from e
+
 
 def fine_tier(days_overdue):
     if days_overdue < 0:
@@ -58,28 +73,16 @@ def fine_tier(days_overdue):
         return "Severe"
 
 
-    def validate_isbn(isbn):
-        if not isinstance(isbn, str):
-            raise ValueError("ISBN must be a string")
-        if len(isbn) == 0:
-            raise ValueError("ISBN cannot be empty")
-        if not isbn.isdigit():
-            raise ValueError("ISBN must contain only digits")
-        if len(isbn) != 13:
-            raise ValueError("ISBN must be exactly 13 digits")
-        return True
-            def total_available_copies(self):
-        return sum(b.available_copies for b in self.books)
-
-    def export_catalog(self, path):
-        content = "\n".join(
-            f"{b.isbn},{b.title},{b.author},{b.copies}" for b in self.books
-        )
-        try:
-            with open(path, "w") as f:
-                f.write(content)
-        except OSError as e:
-            raise LibraryIOError(f"Could not export catalog to {path}: {e}") from e
+def validate_isbn(isbn):
+    if not isinstance(isbn, str):
+        raise ValueError("ISBN must be a string")
+    if len(isbn) == 0:
+        raise ValueError("ISBN cannot be empty")
+    if not isbn.isdigit():
+        raise ValueError("ISBN must contain only digits")
+    if len(isbn) != 13:
+        raise ValueError("ISBN must be exactly 13 digits")
+    return True
 
 
 class Member:
