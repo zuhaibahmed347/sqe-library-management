@@ -6,6 +6,7 @@ class Book:
         self.title = title
         self.author = author
         self.copies = copies  # BUG 2: no validation, negative allowed
+        self.available_copies = copies
 
 
 class Library:
