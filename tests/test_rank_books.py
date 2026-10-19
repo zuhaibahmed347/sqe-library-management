@@ -1,5 +1,4 @@
-from src.library import Library, rank_books_by_popularity
-
+from src.library import Book, Library, rank_books_by_popularity
 
 def test_rank_books_empty_catalog_returns_empty_list():
     library = Library()
