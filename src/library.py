@@ -43,31 +43,43 @@ class Library:
         return True
 
 
-def fine_tier(days_overdue):
-    if days_overdue < 0:
-        raise ValueError("days_overdue cannot be negative")
-    if days_overdue == 0:
-        return "None"
-    elif 1 <= days_overdue <= 7:
-        return "Low"
-    elif 8 <= days_overdue <= 14:
-        return "Medium"
-    elif 15 <= days_overdue <= 30:
-        return "High"
-    else:
-        return "Severe"
+    def fine_tier(days_overdue):
+        if days_overdue < 0:
+            raise ValueError("days_overdue cannot be negative")
+        if days_overdue == 0:
+            return "None"
+        elif 1 <= days_overdue <= 7:
+            return "Low"
+        elif 8 <= days_overdue <= 14:
+            return "Medium"
+        elif 15 <= days_overdue <= 30:
+            return "High"
+        else:
+            return "Severe"
 
 
-def validate_isbn(isbn):
-    if not isinstance(isbn, str):
-        raise ValueError("ISBN must be a string")
-    if len(isbn) == 0:
-        raise ValueError("ISBN cannot be empty")
-    if not isbn.isdigit():
-        raise ValueError("ISBN must contain only digits")
-    if len(isbn) != 13:
-        raise ValueError("ISBN must be exactly 13 digits")
-    return True
+    def validate_isbn(isbn):
+        if not isinstance(isbn, str):
+            raise ValueError("ISBN must be a string")
+        if len(isbn) == 0:
+            raise ValueError("ISBN cannot be empty")
+        if not isbn.isdigit():
+            raise ValueError("ISBN must contain only digits")
+        if len(isbn) != 13:
+            raise ValueError("ISBN must be exactly 13 digits")
+        return True
+            def total_available_copies(self):
+        return sum(b.available_copies for b in self.books)
+
+    def export_catalog(self, path):
+        content = "\n".join(
+            f"{b.isbn},{b.title},{b.author},{b.copies}" for b in self.books
+        )
+        try:
+            with open(path, "w") as f:
+                f.write(content)
+        except OSError as e:
+            raise LibraryIOError(f"Could not export catalog to {path}: {e}") from e
 
 
 class Member:
