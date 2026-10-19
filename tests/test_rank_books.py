@@ -22,3 +22,8 @@ def test_rank_books_orders_by_borrow_count_descending():
        for book in (low, high, mid):
            library.add_book(book)
        assert rank_books_by_popularity(library) == [high, mid, low]
+
+def test_rank_books_tie_broken_alphabetically_by_title():
+    zebra = make_book("Zebra", 5)
+    apple = make_book("Apple", 5)
+    assert rank_books_by_popularity(library_with(zebra, apple)) == [apple, zebra]
