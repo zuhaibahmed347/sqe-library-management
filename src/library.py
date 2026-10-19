@@ -9,6 +9,7 @@ class Book:
         self.author = author
         self.copies = copies  # BUG 2: no validation, negative allowed
         self.available_copies = copies
+        self.times_borrowed = 0
 
 
 class Library:
@@ -92,4 +93,4 @@ class Member:
 
 def rank_books_by_popularity(library):
     """Return the library's books ranked by popularity (most borrowed first)."""
-    return list(library.books)
+    return sorted(library.books, key=lambda b: b.times_borrowed, reverse=True)
