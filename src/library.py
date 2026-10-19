@@ -43,19 +43,19 @@ class Library:
         return True
 
 
-    def fine_tier(days_overdue):
-        if days_overdue < 0:
-            raise ValueError("days_overdue cannot be negative")
-        if days_overdue == 0:
-            return "None"
-        elif 1 <= days_overdue <= 7:
-            return "Low"
-        elif 8 <= days_overdue <= 14:
-            return "Medium"
-        elif 15 <= days_overdue <= 30:
-            return "High"
-        else:
-            return "Severe"
+def fine_tier(days_overdue):
+    if days_overdue < 0:
+        raise ValueError("days_overdue cannot be negative")
+    if days_overdue == 0:
+        return "None"
+    elif 1 <= days_overdue <= 7:
+        return "Low"
+    elif 8 <= days_overdue <= 14:
+        return "Medium"
+    elif 15 <= days_overdue <= 30:
+        return "High"
+    else:
+        return "Severe"
 
 
     def validate_isbn(isbn):
