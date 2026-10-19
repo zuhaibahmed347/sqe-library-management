@@ -1,3 +1,5 @@
+class LibraryIOError(Exception):
+    """Raised when the library cannot read or write its catalog file."""
 class Book:
     def __init__(self, isbn, title, author, copies):
         self.isbn = isbn
