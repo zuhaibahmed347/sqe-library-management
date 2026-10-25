@@ -4,12 +4,14 @@ class LibraryIOError(Exception):
 
 class Book:
     def __init__(self, isbn, title, author, copies):
+        validate_isbn(isbn)
         validate_copies(copies)
         self.isbn = isbn
         self.title = title
         self.author = author
         self.copies = copies
         self.available_copies = copies
+        self.times_borrowed = 0
 
 
 class Library:
@@ -97,4 +99,5 @@ class Member:
         self.name = name
 
 def rank_books_by_popularity(library):
-       return []
+    """Return the library's books ranked by popularity (most borrowed first)."""
+    return sorted(library.books, key=lambda b: (-b.times_borrowed, b.title.casefold()))

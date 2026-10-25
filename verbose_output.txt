@@ -1,0 +1,62 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-8.4.2, pluggy-1.6.0 -- C:\Python314\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Zuhaib Ahmed\OneDrive\Desktop\Software Quality Engineering Lab\Lab\Lab 7\sqe-library-management
+configfile: pytest.ini
+plugins: anyio-4.12.1, langsmith-0.11.1, asyncio-0.24.0, mock-3.15.1
+asyncio: mode=Mode.STRICT, default_loop_scope=None
+collecting ... collected 37 items
+
+tests/test_borrow_book_parametrized.py::test_borrow_book_limit[zero-books-allowed] PASSED [  2%]
+tests/test_borrow_book_parametrized.py::test_borrow_book_limit[one-book-allowed] PASSED [  5%]
+tests/test_borrow_book_parametrized.py::test_borrow_book_limit[four-books-last-slot-allowed] PASSED [  8%]
+tests/test_borrow_book_parametrized.py::test_borrow_book_limit[five-books-at-limit-blocked] PASSED [ 10%]
+tests/test_borrow_book_parametrized.py::test_borrow_book_limit[six-books-over-limit-blocked] PASSED [ 13%]
+tests/test_borrow_book_parametrized.py::test_borrow_book_limit[ten-books-far-over-limit-blocked] PASSED [ 16%]
+tests/test_borrow_limit.py::test_borrow_at_four_books_succeeds PASSED    [ 18%]
+tests/test_borrow_limit.py::test_borrow_at_five_books_blocked PASSED     [ 21%]
+tests/test_borrow_limit.py::test_borrow_at_six_books_blocked PASSED      [ 24%]
+tests/test_export_catalog.py::test_export_catalog_writes_expected_content PASSED [ 27%]
+tests/test_export_catalog.py::test_export_catalog_raises_custom_error_on_oserror PASSED [ 29%]
+tests/test_fine_tier.py::test_fine_tier_valid_classes[0-None] PASSED     [ 32%]
+tests/test_fine_tier.py::test_fine_tier_valid_classes[4-Low] PASSED      [ 35%]
+tests/test_fine_tier.py::test_fine_tier_valid_classes[10-Medium] PASSED  [ 37%]
+tests/test_fine_tier.py::test_fine_tier_valid_classes[20-High] PASSED    [ 40%]
+tests/test_fine_tier.py::test_fine_tier_valid_classes[45-Severe] PASSED  [ 43%]
+tests/test_fine_tier.py::test_fine_tier_negative_days_raises PASSED      [ 45%]
+tests/test_fine_tier_bva.py::test_fine_tier_boundaries[0-None] PASSED    [ 48%]
+tests/test_fine_tier_bva.py::test_fine_tier_boundaries[1-Low] PASSED     [ 51%]
+tests/test_fine_tier_bva.py::test_fine_tier_boundaries[7-Low] PASSED     [ 54%]
+tests/test_fine_tier_bva.py::test_fine_tier_boundaries[8-Medium] PASSED  [ 56%]
+tests/test_fine_tier_bva.py::test_fine_tier_boundaries[9-Medium] PASSED  [ 59%]
+tests/test_fine_tier_bva.py::test_fine_tier_boundaries[14-Medium] PASSED [ 62%]
+tests/test_fine_tier_bva.py::test_fine_tier_boundaries[15-High] PASSED   [ 64%]
+tests/test_fine_tier_bva.py::test_fine_tier_boundaries[16-High] PASSED   [ 67%]
+tests/test_fine_tier_bva.py::test_fine_tier_boundaries[30-High] PASSED   [ 70%]
+tests/test_fine_tier_bva.py::test_fine_tier_boundaries[31-Severe] PASSED [ 72%]
+tests/test_fine_tier_bva.py::test_fine_tier_boundaries[32-Severe] PASSED [ 75%]
+tests/test_fine_tier_bva.py::test_fine_tier_negative_raises PASSED       [ 78%]
+tests/test_library_catalog.py::test_total_available_copies_empty_catalog PASSED [ 81%]
+tests/test_library_catalog.py::test_total_available_copies_single_book PASSED [ 83%]
+tests/test_library_catalog.py::test_total_available_copies_multiple_books PASSED [ 86%]
+tests/test_validate_isbn.py::test_validate_isbn_length_boundaries[11111111111-False] PASSED [ 89%]
+tests/test_validate_isbn.py::test_validate_isbn_length_boundaries[111111111111-False] PASSED [ 91%]
+tests/test_validate_isbn.py::test_validate_isbn_length_boundaries[1111111111111-True] PASSED [ 94%]
+tests/test_validate_isbn.py::test_validate_isbn_length_boundaries[11111111111111-False] PASSED [ 97%]
+tests/test_validate_isbn.py::test_validate_isbn_length_boundaries[111111111111111-False] PASSED [100%]
+
+============================== warnings summary ===============================
+..\..\..\..\..\..\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:179: 630 warnings
+  C:\Users\Zuhaib Ahmed\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:179: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return asyncio.iscoroutinefunction(obj) or inspect.isasyncgenfunction(obj)
+
+..\..\..\..\..\..\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:450: 37 warnings
+  C:\Users\Zuhaib Ahmed\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:450: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return asyncio.iscoroutinefunction(func)
+
+tests/test_borrow_book_parametrized.py::test_borrow_book_limit[zero-books-allowed]
+  C:\Users\Zuhaib Ahmed\AppData\Roaming\Python\Python314\site-packages\pytest_asyncio\plugin.py:1056: DeprecationWarning: 'asyncio.get_event_loop_policy' is deprecated and slated for removal in Python 3.16
+    return asyncio.get_event_loop_policy()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 37 passed, 668 warnings in 0.15s =======================
