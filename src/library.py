@@ -4,8 +4,7 @@ class LibraryIOError(Exception):
 
 class Book:
     def __init__(self, isbn, title, author, copies):
-        if not isinstance(copies, int) or isinstance(copies, bool) or copies < 0:
-            raise ValueError("copies must be a non-negative integer")
+        validate_copies(copies)
         self.isbn = isbn
         self.title = title
         self.author = author
@@ -83,6 +82,12 @@ def validate_isbn(isbn):
         raise ValueError("ISBN must contain only digits")
     if len(isbn) != 13:
         raise ValueError("ISBN must be exactly 13 digits")
+    return True
+
+
+def validate_copies(copies):
+    if not isinstance(copies, int) or isinstance(copies, bool) or copies < 0:
+        raise ValueError("copies must be a non-negative integer")
     return True
 
 

@@ -14,6 +14,13 @@ def test_book_rejects_negative_and_non_integer_copies(book_details, copies):
         Book(*book_details, copies)
 
 
+@pytest.mark.parametrize("copies", [0, 2])
+def test_book_accepts_zero_and_positive_integer_copies(book_details, copies):
+    book = Book(*book_details, copies)
+
+    assert book.copies == copies
+
+
 @pytest.fixture
 def library_with_book():
     library = Library()
