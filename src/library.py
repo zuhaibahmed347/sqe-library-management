@@ -93,4 +93,4 @@ class Member:
 
 def rank_books_by_popularity(library):
     """Return the library's books ranked by popularity (most borrowed first)."""
-    return sorted(library.books, key=lambda b: (-b.times_borrowed, b.title))
+    return sorted(library.books, key=lambda b: (-b.times_borrowed, b.title.casefold()))
