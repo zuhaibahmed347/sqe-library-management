@@ -1,5 +1,20 @@
 from src.library import Book, Library, rank_books_by_popularity
 
+
+def make_book(title, times_borrowed):
+    isbn = f"978{sum(map(ord, title)):010d}"
+    book = Book(isbn, title, "Author", 1)
+    book.times_borrowed = times_borrowed
+    return book
+
+
+def library_with(*books):
+    library = Library()
+    for book in books:
+        library.add_book(book)
+    return library
+
+
 def test_rank_books_empty_catalog_returns_empty_list():
     library = Library()
     assert rank_books_by_popularity(library) == []
@@ -27,3 +42,10 @@ def test_rank_books_tie_broken_alphabetically_by_title():
     zebra = make_book("Zebra", 5)
     apple = make_book("Apple", 5)
     assert rank_books_by_popularity(library_with(zebra, apple)) == [apple, zebra]
+
+
+def test_rank_books_tie_break_is_case_insensitive():
+    lower = make_book("alpha", 5)
+    upper = make_book("Beta", 5)
+
+    assert rank_books_by_popularity(library_with(lower, upper)) == [lower, upper]
