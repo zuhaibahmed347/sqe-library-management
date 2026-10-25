@@ -4,6 +4,7 @@ class LibraryIOError(Exception):
 
 class Book:
     def __init__(self, isbn, title, author, copies):
+        validate_isbn(isbn)
         self.isbn = isbn
         self.title = title
         self.author = author
