@@ -4,10 +4,12 @@ class LibraryIOError(Exception):
 
 class Book:
     def __init__(self, isbn, title, author, copies):
+        if not isinstance(copies, int) or isinstance(copies, bool) or copies < 0:
+            raise ValueError("copies must be a non-negative integer")
         self.isbn = isbn
         self.title = title
         self.author = author
-        self.copies = copies  # BUG 2: no validation, negative allowed
+        self.copies = copies
         self.available_copies = copies
 
 
@@ -23,8 +25,7 @@ class Library:
         self.books.append(book)
 
     def search_by_title(self, title):
-        # BUG 5: case-sensitive comparison
-        results = [b for b in self.books if b.title == title]
+        results = [b for b in self.books if b.title.casefold() == title.casefold()]
         return results
 
     def get_most_popular_book(self, borrow_counts):
