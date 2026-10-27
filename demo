@@ -1,0 +1,96 @@
+import pytest
+from parametrized import is_prime
+
+        # --------> 1 Equivalence Partitioning classes <---------
+        # valid numbers: 2,3,5,7,11,13,17,19,23,29
+@pytest.mark.parametrize("valid_num", [2,3,5,7,11, 13, 17, 19, 23, 29])
+def test_is_prime_valid_numbers(valid_num):
+    assert is_prime(valid_num) is True
+    
+        # composite numbers: 1,4,6,8,9,10,12,14,15,16,18,20
+@pytest.mark.parametrize("composite_num", [1,4,6,8,9,10,12,14,15,16,18,20])
+def test_is_prime_invalid_numbers(composite_num):
+    assert is_prime(composite_num) is False 
+
+       # --------> 2 Boundary Value Analysis (around 2 threshold) <---------
+
+@pytest.mark.parametrize("n, expected", 
+                         [
+                             (-1, False),
+                             (0, False),
+                             (1, False),
+                             (2, True),
+                             (3, True), 
+                         ],)
+
+
+def test_is_prime_boundary_values(n, expected):
+    assert is_prime(n) is expected
+
+        # --------> 3 Boundary Value Analysis (around 2 threshold) <---------
+
+@pytest.mark.parametrize("square_of_prime", [4, 9, 25, 49, 121])
+def test_is_prime_square_of_prime(square_of_prime):
+    assert is_prime(square_of_prime) is False
+
+
+         # --------> 4 Negaitve or Exception Testing (Invalid Types) <---------
+
+@pytest.mark.parametrize("invalid_type", [ 2.0, "string", None, [3], {}, []])
+def test_is_prime_invalid_types(invalid_type):
+    with pytest.raises(TypeError):
+        is_prime(invalid_type)
+
+
+
+
+
+
+
+
+import pytest
+from db import Database
+
+#develop fresh instance every time before testing
+@pytest.fixture
+def db():
+    """ Create an object of Database class before each testing"""
+    return Database()
+
+       # ----> 1 Positive Functional Test <----
+def test_add_and_retrive_user(db):
+    db.add_user(1, "John Doe")
+    db.get_user(1) == "John Doe"
+
+        # ----> 2 Negative Test : Duplicate Primary Keys <----
+def test_add_duplicate_user(db):
+    db.add_user(1, "John")
+    with pytest.raises(ValueError):
+        db.add_user(1, "John")
+
+       # 3.-----> Negative Testing 
+def test_negative_get_non_existant_user(db):
+    assert db.get_user(2) == None
+
+        # 3.-----> Boundary value Testing 
+
+@pytest.mark.parametrize("id, name", 
+                               [
+                                 (0, "Zero"),
+                                 (-1, "Minus one"),
+                                 (99999999999, "Large INT"),
+                                 ("", "Empty String ID"),
+                               ],)
+
+def test_unusual_boundary_value(db, id, name):
+    db.add_user(id, name)
+    assert db.get_user(id) == name
+
+
+
+         
+
+
+
+
+    
