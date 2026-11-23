@@ -98,6 +98,19 @@ class Member:
         self.member_id = member_id
         self.name = name
 
+
+def borrow_percentile(member, library):
+    member_id = member.member_id if isinstance(member, Member) else member
+    counts = [library.borrowed_counts.get(mid, 0) for mid in library.members]
+    if member_id not in library.members:
+        raise ValueError("Member not found")
+    target = library.borrowed_counts.get(member_id, 0)
+    vals = sorted(counts)
+    rank_index = vals.index(target)
+    if len(vals) == 1:
+        return 100.0
+    return (rank_index) / len(vals) * 100
+
 def rank_books_by_popularity(library):
     """Return the library's books ranked by popularity (most borrowed first)."""
     return sorted(library.books, key=lambda b: (-b.times_borrowed, b.title.casefold()))
